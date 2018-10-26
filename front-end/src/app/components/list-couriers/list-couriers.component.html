@@ -1,0 +1,54 @@
+<table class="table table-striped table-hover">
+  <tr *ngFor="let courier of couriers | async">
+    <td>
+      {{courier.id}}
+    </td>
+    <td>
+      {{courier.name}}
+    </td>
+    <td>
+      {{courier.surname}}
+    </td>
+    <td>
+      {{courier.phone}}
+    </td>
+    <td>
+      {{courier.age}}
+    </td>
+
+    <td>
+      <table>
+        <tr *ngFor="let pack of courier.packs">
+          <td>
+            {{pack.id}}
+          </td>
+          <td>
+            {{pack.address}}
+          </td>
+          <td>
+            {{pack.typeSize}}
+          </td>
+          <td>
+            {{pack.price}}
+          </td>
+          <td>
+            {{pack.express}}
+          </td>
+        </tr>
+      </table>
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="[courier.id]">Pokaż</button>
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="[courier.id, 'edit']">Edytuj</button>
+    </td>
+
+    <td>
+      <button class="btn btn-danger" (click)="remove(courier)">Usuń</button>
+    </td>
+  </tr>
+
+</table>

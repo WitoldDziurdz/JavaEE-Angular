@@ -1,0 +1,23 @@
+<table class="table table-striped" *ngIf="courier">
+  <tr>
+    <td>Imie</td>
+    <td>{{courier.name}}</td>
+  </tr>
+
+  <tr>
+    <td>Nazwisko</td>
+    <td>{{courier.surname}}</td>
+  </tr>
+
+  <tr>
+    <td>Numer telefonu</td>
+    <td>{{courier.phone}}</td>
+  </tr>
+
+  <tr>
+    <td>Wiek</td>
+    <td>{{courier.age}}</td>
+  </tr>
+</table>
+
+<button class="btn btn-default" routerLink="/couriers">Powrót</button>

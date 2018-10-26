@@ -1,0 +1,31 @@
+<table class="table table-striped table-hover">
+  <tr *ngFor="let pack of packs | async">
+    <td>
+      {{pack.id}}
+    </td>
+    <td>
+      {{pack.address}}
+    </td>
+    <td>
+      {{pack.typeSize}}
+    </td>
+    <td>
+      {{pack.price}}
+    </td>
+    <td>
+      {{pack.express}}
+    </td>
+    <td>
+      <button class="btn btn-default" [routerLink]="['packs', pack.id]">Pokaż</button>
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="['packs', pack.id, 'edit']">Edytuj</button>
+    </td>
+
+    <td>
+      <button class="btn btn-danger" (click)="remove(pack)">Usuń</button>
+    </td>
+  </tr>
+
+</table>

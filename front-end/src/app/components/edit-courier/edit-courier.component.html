@@ -1,0 +1,49 @@
+<form #bookForm="ngForm" *ngIf="courier">
+  <table class="table table-striped">
+    <tr>
+      <td>Imie:</td>
+      <td>
+        <input type="text" name="name" class="form-control" [(ngModel)]="courier.name">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Nazwisko</td>
+      <td>
+        <input type="text" name="surname" class="form-control" [(ngModel)]="courier.surname">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Numer telephonu</td>
+      <td>
+        <input type="text" name="phone" class="form-control" [(ngModel)]="courier.phone">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Wiek</td>
+      <td>
+        <input type="text" name="age" class="form-control" [(ngModel)]="courier.age">
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+        Paczki:
+      </td>
+      <td>
+        <select [(ngModel)]="courier.packs" name="authors" multiple class="form-control" [compareWith]="comparePacks">
+          <option *ngFor="let pack of packs" [ngValue]="pack">
+            {{pack.id}} {{pack.address}}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="save()">Zapisz</button>
+  <button type="button" class="btn btn-default" routerLink="/couriers">Powrót</button>
+</form>
