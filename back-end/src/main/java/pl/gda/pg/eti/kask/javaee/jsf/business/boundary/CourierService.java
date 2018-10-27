@@ -50,25 +50,13 @@ public class CourierService implements Serializable {
     }
 
     public void savePack(Pack pack){
-        if(pack.idIsNull()){
-            if(packs.size() > 0) {
-                pack.setId(packs.lastKey() + 1);
-            } else {
-                pack.setId(1);
-            }
-        }
+        setId(pack);
         packs.put(pack.getId(),pack);
         updatePackFromCouriers(pack);
     }
 
     public void saveCourier(Courier courier){
-        if(courier.idIsNull()){
-            if(couriers.size() > 0) {
-                courier.setId(couriers.lastKey() + 1);
-            } else {
-                courier.setId(1);
-            }
-        }
+        setId(courier);
         couriers.put(courier.getId(),courier);
     }
 
@@ -81,6 +69,26 @@ public class CourierService implements Serializable {
     private void updatePackFromCouriers(Pack pack){
         for(Courier courier : findAllCouriers()){
             courier.updatePack(pack);
+        }
+    }
+
+    private void setId(Courier courier){
+        if(courier.idIsNull()){
+            if(couriers.size() > 0) {
+                courier.setId(couriers.lastKey() + 1);
+            } else {
+                courier.setId(1);
+            }
+        }
+    }
+
+    private void setId(Pack pack){
+        if(pack.idIsNull()){
+            if(packs.size() > 0) {
+                pack.setId(packs.lastKey() + 1);
+            } else {
+                pack.setId(1);
+            }
         }
     }
 }
