@@ -35,7 +35,7 @@
         Paczki:
       </td>
       <td>
-        <select [(ngModel)]="courier.packs" name="authors" multiple class="form-control" [compareWith]="comparePacks">
+        <select [(ngModel)]="courier.packs" name="packs" multiple class="form-control" [compareWith]="comparePacks">
           <option *ngFor="let pack of packs" [ngValue]="pack">
             {{pack.id}} {{pack.address}}
           </option>

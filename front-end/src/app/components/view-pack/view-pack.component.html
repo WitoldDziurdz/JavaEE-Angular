@@ -1,0 +1,28 @@
+<table class="table table-striped" *ngIf="pack">
+  <tr>
+    <td>ID</td>
+    <td>{{pack.id}}</td>
+  </tr>
+
+  <tr>
+    <td>Adres</td>
+    <td>{{pack.address}}</td>
+  </tr>
+
+  <tr>
+    <td>Typ paczki</td>
+    <td>{{pack.typeSize}}</td>
+  </tr>
+
+  <tr>
+    <td>Cena</td>
+    <td>{{pack.price}}</td>
+  </tr>
+
+  <tr>
+    <td>Ekspresowa</td>
+    <td>{{pack.express}}</td>
+  </tr>
+</table>
+
+<button class="btn btn-default" routerLink="/packs">Powrót</button>

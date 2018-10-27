@@ -1,0 +1,39 @@
+<form #bookForm="ngForm" *ngIf="pack">
+  <table class="table table-striped">
+    <tr>
+      <td>Adress</td>
+      <td>
+        <input type="text" name="address" class="form-control" [(ngModel)]="pack.address">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Typ paczki</td>
+      <td>
+        <select [(ngModel)]="pack.typeSize" name="typeSizes" class="form-control">
+          <option *ngFor="let typeSize of typeSizes" [ngValue]="typeSize">
+            {{typeSize}}
+          </option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Cena</td>
+      <td>
+        <input type="text" name="price" class="form-control" [(ngModel)]="pack.price">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Expresowa</td>
+      <td>
+        <input class="mat-checkbox" type="checkbox" name="express" [(ngModel)]="pack.express">
+      </td>
+    </tr>
+
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="save()">Zapisz</button>
+  <button type="button" class="btn btn-default" routerLink="/packs">Powrót</button>
+</form>

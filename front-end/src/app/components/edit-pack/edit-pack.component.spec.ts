@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewCourierComponent } from './view-courier.component';
+import { EditPackComponent } from './edit-pack.component';
 
-describe('ViewPackComponent', () => {
-  let component: ViewCourierComponent;
-  let fixture: ComponentFixture<ViewCourierComponent>;
+describe('EditPackComponent', () => {
+  let component: EditPackComponent;
+  let fixture: ComponentFixture<EditPackComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewCourierComponent ]
+      declarations: [ EditPackComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewCourierComponent);
+    fixture = TestBed.createComponent(EditPackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

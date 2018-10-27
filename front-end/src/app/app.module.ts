@@ -9,13 +9,17 @@ import {ListPacksComponent} from './components/list-packs/list-packs.component';
 import {ListCouriersComponent} from './components/list-couriers/list-couriers.component';
 import {EditCourierComponent} from './components/edit-courier/edit-courier.component';
 import {ViewCourierComponent} from './components/view-courier/view-courier.component';
+import {ViewPackComponent} from './components/view-pack/view-pack.component';
+import {EditPackComponent} from './components/edit-pack/edit-pack.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ViewPackComponent,
     ViewCourierComponent,
     EditCourierComponent,
+    EditPackComponent,
     ListPacksComponent,
     ListCouriersComponent,
   ],

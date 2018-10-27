@@ -6,6 +6,10 @@ select[size].form-control {
     height: 34px;
 }
 
+.mat-checkbox {
+  height: 18px;
+  width: 18px;
+}
 .ui-state-default .ui-icon {
     background-image: url("#{resource['primefaces-bootstrap/images/ui-icons_333333_256x240.png']}");
 }
@@ -76,6 +80,8 @@ tr.ui-selectlistbox-item td {
 .main select[size].form-control{
     height: auto;
 }
+
+
 
 .ml-1 {
     margin-left: 1em;
