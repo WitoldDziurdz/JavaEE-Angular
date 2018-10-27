@@ -1,7 +1,6 @@
 package pl.gda.pg.eti.kask.javaee.jsf.business.boundary;
 
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
-import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Department;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.TypeSize;
 
@@ -69,11 +68,6 @@ public class CourierService implements Serializable {
         return couriers.get(id);
     }
 
-    public Department findDepartment(int id){
-        //to do
-        return null;
-    }
-
     public void removePack(Pack pack){
         removePackFromCouriers(pack);
         packs.remove(pack.getId());
@@ -107,16 +101,7 @@ public class CourierService implements Serializable {
 
     private void removePackFromCouriers(Pack pack){
         for(Courier courier : findAllCouriers()){
-           removePackFromCourier(courier, pack);
+           courier.getPacks().remove(pack);
         }
     }
-
-    private void removePackFromCourier(Courier courier, Pack pack){
-        for(Pack p : courier.getPacks()){
-            if(p.equals(pack)){
-                courier.getPacks().remove(pack);
-            }
-        }
-    }
-
 }
