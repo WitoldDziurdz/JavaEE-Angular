@@ -17,7 +17,7 @@ public class Courier implements Serializable {
     private String surname;
     private String phone;
     private int age;
-    List<Pack> packs = new ArrayList<>();
+    private List<Pack> packs = new ArrayList<>();
 
     @Override
     public String toString(){
@@ -32,6 +32,13 @@ public class Courier implements Serializable {
                 }
             }
         }
+    }
+
+    public void update(Courier courier){
+        this.name = courier.name;
+        this.surname = courier.surname;
+        this.phone = courier.phone;
+        this.age = courier.age;
     }
 
     public boolean idIsNull(){
