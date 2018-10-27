@@ -23,4 +23,19 @@ public class Courier implements Serializable {
     public String toString(){
         return  this.name + " " + this.surname;
     }
+
+    public void updatePack(Pack pack){
+        if(packs.contains(pack)){
+            for(Pack selfPack: packs){
+                if(selfPack.equals(pack)) {
+                    selfPack.update(pack);
+                }
+            }
+        }
+    }
+
+    public boolean idIsNull(){
+        return this.id == null;
+    }
+
 }

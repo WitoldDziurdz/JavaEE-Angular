@@ -14,5 +14,9 @@ public class Department implements Serializable {
     private int numberOfWorkers;
     private String address;
     private boolean isStorage;
+
+    public boolean idIsNull(){
+        return this.id == null;
+    }
 }
 

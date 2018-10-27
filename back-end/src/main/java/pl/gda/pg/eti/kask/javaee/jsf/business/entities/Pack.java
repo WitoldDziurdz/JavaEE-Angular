@@ -20,4 +20,16 @@ public class Pack implements Serializable {
     public String toString(){
         return  this.id + " " + this.address;
     }
+
+
+    public void update(Pack pack){
+        this.address = pack.address;
+        this.typeSize = pack.typeSize;
+        this.price = pack.price;
+        this.express = pack.express;
+    }
+
+    public boolean idIsNull(){
+        return this.id == null;
+    }
 }
