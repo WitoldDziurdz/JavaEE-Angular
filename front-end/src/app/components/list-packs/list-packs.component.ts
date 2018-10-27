@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {CourierService} from '../../services/courier.service';
 import {Pack} from '../../model/pack';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -13,11 +14,17 @@ import {Pack} from '../../model/pack';
 export class ListPacksComponent implements OnInit {
   packs: Observable<Pack[]>;
 
-  constructor(private courierService: CourierService) {
+  constructor(private courierService: CourierService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.packs = this.courierService.findAllPacks();
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id == null) {
+      this.packs = this.courierService.findAllPacks();
+    } else {
+      this.packs = this.courierService.getPacksOfCourier(Number(id));
+    }
   }
 
   remove(pack: Pack) {

@@ -34,6 +34,6 @@ export class EditPackComponent implements OnInit {
 
   save() {
     this.booksService.savePack(this.pack)
-      .subscribe(() => this.router.navigateByUrl('packs'));
+      .subscribe(() => this.router.navigateByUrl('/packs'));
   }
 }

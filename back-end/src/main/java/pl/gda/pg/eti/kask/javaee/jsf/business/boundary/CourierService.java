@@ -84,7 +84,7 @@ public class CourierService implements Serializable {
     }
 
     public void savePack(Pack pack){
-        if(pack.getId() == 0){
+        if(pack.getId() == null){
             if(packs.size() > 0) {
                 pack.setId(packs.lastKey() + 1);
             } else {
@@ -95,7 +95,7 @@ public class CourierService implements Serializable {
     }
 
     public void saveCourier(Courier courier){
-        if(courier.getId() == 0){
+        if(courier.getId() == null){
             if(couriers.size() > 0) {
                 courier.setId(couriers.lastKey() + 1);
             } else {

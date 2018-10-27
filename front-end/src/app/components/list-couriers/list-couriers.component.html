@@ -17,38 +17,20 @@
     </td>
 
     <td>
-      <table>
-        <tr *ngFor="let pack of courier.packs">
-          <td>
-            {{pack.id}}
-          </td>
-          <td>
-            {{pack.address}}
-          </td>
-          <td>
-            {{pack.typeSize}}
-          </td>
-          <td>
-            {{pack.price}}
-          </td>
-          <td>
-            {{pack.express}}
-          </td>
-        </tr>
-      </table>
+      <button class="btn btn-default" [routerLink]="['/couriers',courier.id, 'packs']">Lista paczek kuriera</button>
     </td>
 
     <td>
-      <button class="btn btn-default" [routerLink]="[courier.id]">Pokaż</button>
+      <button class="btn btn-default" [routerLink]="['/couriers',courier.id]">Pokaż</button>
     </td>
 
     <td>
-      <button class="btn btn-default" [routerLink]="[courier.id, 'edit']">Edytuj</button>
+      <button class="btn btn-default" [routerLink]="['/couriers',courier.id, 'edit']">Edytuj</button>
     </td>
 
     <td>
       <button class="btn btn-danger" (click)="remove(courier)">Usuń</button>
     </td>
   </tr>
-
 </table>
+<button class="btn btn-primary" routerLink="new">Nowy kurier</button>

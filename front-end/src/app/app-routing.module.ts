@@ -9,11 +9,14 @@ import {EditPackComponent} from './components/edit-pack/edit-pack.component';
 
 const routes: Routes = [
   {path: 'packs', component: ListPacksComponent},
+  {path: 'packs/new', component: EditPackComponent},
   {path: 'packs/:id', component: ViewPackComponent},
   {path: 'packs/:id/edit', component: EditPackComponent},
   {path: 'couriers', component: ListCouriersComponent},
+  {path: 'couriers/new', component: EditCourierComponent},
   {path: 'couriers/:id/edit', component: EditCourierComponent},
-  {path: 'couriers/:id', component: ViewCourierComponent}
+  {path: 'couriers/:id', component: ViewCourierComponent},
+  {path: 'couriers/:id/packs', component: ListPacksComponent}
 
 ];
 

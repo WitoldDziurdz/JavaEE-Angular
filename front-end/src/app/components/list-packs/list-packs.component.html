@@ -16,16 +16,16 @@
       {{pack.express}}
     </td>
     <td>
-      <button class="btn btn-default" [routerLink]="[pack.id]">Pokaż</button>
+      <button class="btn btn-default" [routerLink]="['/packs', pack.id]">Pokaż</button>
     </td>
 
     <td>
-      <button class="btn btn-default" [routerLink]="[pack.id, 'edit']">Edytuj</button>
+      <button class="btn btn-default" [routerLink]="['/packs', pack.id, 'edit']">Edytuj</button>
     </td>
 
     <td>
       <button class="btn btn-danger" (click)="remove(pack)">Usuń</button>
     </td>
   </tr>
-
+  <button class="btn btn-primary" routerLink="/packs/new">Nowa paczka</button>
 </table>

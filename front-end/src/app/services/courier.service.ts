@@ -18,6 +18,10 @@ export class CourierService {
     return this.http.get<Pack>(`api/packs/${id}`);
   }
 
+  getPacksOfCourier(id: number): Observable<Pack[]> {
+    return this.http.get<Pack[]>(`api/couriers/${id}/packs`);
+  }
+
   removePack(pack: Pack): Observable<any> {
     return this.http.delete<Pack>(`api/packs/${pack.id}`);
   }
@@ -46,7 +50,7 @@ export class CourierService {
     if (courier.id) {
       return this.http.put(`api/couriers/${courier.id}`, courier);
     } else {
-      return this.http.post(`api/couriers/${courier.id}`, courier);
+      return this.http.post('api/couriers/', courier);
     }
   }
 }
