@@ -35,7 +35,7 @@ export class EditCourierComponent implements OnInit {
 
   save() {
     this.booksService.saveCourier(this.courier)
-      .subscribe(() => this.router.navigateByUrl('couriers'));
+      .subscribe(() => this.router.navigateByUrl('/couriers'));
   }
 
   comparePacks(pack1: Pack, pack2: Pack): boolean {

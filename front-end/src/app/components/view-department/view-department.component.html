@@ -1,0 +1,23 @@
+<table class="table table-striped" *ngIf="department">
+  <tr>
+    <td>ID</td>
+    <td>{{department.id}}</td>
+  </tr>
+
+  <tr>
+    <td>Liczba pracownikow</td>
+    <td>{{department.numberOfWorkers}}</td>
+  </tr>
+
+  <tr>
+    <td>Adres</td>
+    <td>{{department.address}}</td>
+  </tr>
+
+  <tr>
+    <td>Magazyn</td>
+    <td>{{department.storage}}</td>
+  </tr>
+</table>
+
+<button class="btn btn-default" routerLink="/departments">Powrót</button>

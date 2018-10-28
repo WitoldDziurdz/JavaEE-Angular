@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Pack} from '../model/pack';
 import {Courier} from '../model/courier';
+import {Department} from '../model/department';
 
 @Injectable()
 export class CourierService {
@@ -51,6 +52,30 @@ export class CourierService {
       return this.http.put(`api/couriers/${courier.id}`, courier);
     } else {
       return this.http.post('api/couriers/', courier);
+    }
+  }
+
+  findAllDepartments(): Observable<Department[]> {
+    return this.http.get<Department[]>('api/departments');
+  }
+
+  getCouriersOfDepartment(id: number): Observable<Courier[]> {
+    return this.http.get<Courier[]>(`api/departments/${id}/couriers`);
+  }
+
+  findDepartment(id: number): Observable<Department> {
+    return this.http.get<Department>(`api/departments/${id}`);
+  }
+
+  removeDepartment(department: Department) {
+    return this.http.delete<Department>(`api/departments/${department.id}`);
+  }
+
+  saveDepartment(department: Department) {
+    if (department.id) {
+      return this.http.put(`api/departments/${department.id}`, department);
+    } else {
+      return this.http.post('api/departments/', department);
     }
   }
 }

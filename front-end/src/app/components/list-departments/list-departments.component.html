@@ -1,0 +1,33 @@
+<table class="table table-striped table-hover">
+  <tr *ngFor="let department of departments | async">
+    <td>
+      {{department.id}}
+    </td>
+    <td>
+      {{department.numberOfWorkers}}
+    </td>
+    <td>
+      {{department.address}}
+    </td>
+    <td>
+      {{department.storage}}
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="['/departments',department.id, 'couriers']">Lista kurierow oddzialu</button>
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="['/departments',department.id]">Pokaż</button>
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="['/departments',department.id, 'edit']">Edytuj</button>
+    </td>
+
+    <td>
+      <button class="btn btn-danger" (click)="remove(department)">Usuń</button>
+    </td>
+  </tr>
+</table>
+<button class="btn btn-primary" routerLink="new">Nowy oddzial</button>

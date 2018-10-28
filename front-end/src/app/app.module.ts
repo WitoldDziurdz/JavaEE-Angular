@@ -11,6 +11,9 @@ import {EditCourierComponent} from './components/edit-courier/edit-courier.compo
 import {ViewCourierComponent} from './components/view-courier/view-courier.component';
 import {ViewPackComponent} from './components/view-pack/view-pack.component';
 import {EditPackComponent} from './components/edit-pack/edit-pack.component';
+import {ListDepartmentsComponent} from './components/list-departments/list-departments.component';
+import {ViewDepartmentComponent} from './components/view-department/view-department.component';
+import {EditDepartmentComponent} from './components/edit-department/edit-department.component';
 
 
 @NgModule({
@@ -18,10 +21,13 @@ import {EditPackComponent} from './components/edit-pack/edit-pack.component';
     AppComponent,
     ViewPackComponent,
     ViewCourierComponent,
+    ViewDepartmentComponent,
     EditCourierComponent,
     EditPackComponent,
+    EditDepartmentComponent,
     ListPacksComponent,
     ListCouriersComponent,
+    ListDepartmentsComponent,
   ],
   imports: [
     BrowserModule,

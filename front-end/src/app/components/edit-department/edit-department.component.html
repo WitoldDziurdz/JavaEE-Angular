@@ -1,0 +1,40 @@
+<form #bookForm="ngForm" *ngIf="department">
+  <table class="table table-striped">
+    <tr>
+      <td>Liczba pracownikow:</td>
+      <td>
+        <input type="text" name="numberOfWorkers" class="form-control" [(ngModel)]="department.numberOfWorkers">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Adres</td>
+      <td>
+        <input type="text" name="address" class="form-control" [(ngModel)]="department.address">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Magazyn</td>
+      <td>
+        <input class="mat-checkbox" type="checkbox" name="storage" [(ngModel)]="department.storage">
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Paczki:
+      </td>
+      <td>
+        <select [(ngModel)]="department.couriers" name="couriers" multiple class="form-control" [compareWith]="compareCourier">
+          <option *ngFor="let courier of couriers" [ngValue]="courier">
+            {{courier.id}} {{courier.name}} {{courier.surname}}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="save()">Zapisz</button>
+  <button type="button" class="btn btn-default" routerLink="/departments">Powrót</button>
+</form>

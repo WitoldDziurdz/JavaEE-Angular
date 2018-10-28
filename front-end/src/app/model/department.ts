@@ -1,6 +1,9 @@
+import {Courier} from './courier';
+
 export class Department {
   id: number;
   numberOfWorkers: number;
   address: string;
-  isStorage: boolean;
+  couriers: Courier[];
+  storage: boolean;
 }

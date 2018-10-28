@@ -6,6 +6,9 @@ import {EditCourierComponent} from './components/edit-courier/edit-courier.compo
 import {ViewCourierComponent} from './components/view-courier/view-courier.component';
 import {ViewPackComponent} from './components/view-pack/view-pack.component';
 import {EditPackComponent} from './components/edit-pack/edit-pack.component';
+import {ListDepartmentsComponent} from './components/list-departments/list-departments.component';
+import {ViewDepartmentComponent} from './components/view-department/view-department.component';
+import {EditDepartmentComponent} from './components/edit-department/edit-department.component';
 
 const routes: Routes = [
   {path: 'packs', component: ListPacksComponent},
@@ -16,8 +19,11 @@ const routes: Routes = [
   {path: 'couriers/new', component: EditCourierComponent},
   {path: 'couriers/:id/edit', component: EditCourierComponent},
   {path: 'couriers/:id', component: ViewCourierComponent},
-  {path: 'couriers/:id/packs', component: ListPacksComponent}
-
+  {path: 'couriers/:id/packs', component: ListPacksComponent},
+  {path: 'departments', component: ListDepartmentsComponent},
+  {path: 'departments/:id', component: ViewDepartmentComponent},
+  {path: 'departments/:id/edit', component: EditDepartmentComponent},
+  {path: 'departments/:id/couriers', component: ListCouriersComponent},
 ];
 
 @NgModule({
