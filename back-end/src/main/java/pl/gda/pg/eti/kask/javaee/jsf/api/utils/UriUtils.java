@@ -31,7 +31,7 @@ public class UriUtils {
         String url = UriBuilder.fromResource(clazz)
                 .queryParam("start", String.valueOf(start))
                 .queryParam("limit",String.valueOf(limit))
-                .build().getPath();
+                .build().toString();
         return prefix.concat(url);
     }
 

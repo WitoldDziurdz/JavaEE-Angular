@@ -1,9 +1,6 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api.pagination;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.gda.pg.eti.kask.javaee.jsf.api.PackController;
 import pl.gda.pg.eti.kask.javaee.jsf.api.utils.LinkUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.PackWrapper;
@@ -16,14 +13,13 @@ import java.util.List;
 
 import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.UriUtils.uriWithQuery;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Setter
 public class PackPagination implements Serializable {
 
     private List<PackWrapper> packs;
-
     private List<Link> links;
 
     public PackPagination(int start, final int limit, List<Pack> packs){
@@ -38,7 +34,7 @@ public class PackPagination implements Serializable {
         if(finish > packs.size()){
             finish = packs.size();
         }
-        getLinks(start,limit,packs.size());
+        links = getLinks(start,limit,packs.size());
         this.packs = getPackWrappers(start,finish,packs);
     }
 
@@ -51,8 +47,8 @@ public class PackPagination implements Serializable {
         return packWrappers;
     }
 
-    private void getLinks(final int start, final int limit, final int size){
-        links = LinkUtils.getMainLinks();
+    private List<Link> getLinks(final int start, final int limit, final int size){
+        List<Link> links = LinkUtils.getMainLinks();
         if(start > 0){
             int prev = (start-limit) > 0 ?(start-limit):0;
             links.add(new Link("prev_page",uriWithQuery(PackController.class,prev,limit)));
@@ -61,5 +57,6 @@ public class PackPagination implements Serializable {
             int next = (start+limit) < size ?(start+limit):size;
             links.add(new Link("next_page",uriWithQuery(PackController.class,next,limit)));
         }
+        return links;
     }
 }

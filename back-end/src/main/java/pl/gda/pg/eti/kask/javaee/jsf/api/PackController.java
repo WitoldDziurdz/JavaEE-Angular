@@ -28,8 +28,7 @@ public class PackController {
     @GET
     @Path("")
     public PackPagination getAllPacks(@DefaultValue("0") @QueryParam("start") Integer start,
-                                      @DefaultValue("3") @QueryParam("limit") Integer limit){
-        //return WrapUtils.wrapPacks(courierService.findAllPacks());
+                                      @DefaultValue("2") @QueryParam("limit") Integer limit){
         PackPagination packPagination = new PackPagination(start,limit,courierService.findAllPacks());
         return packPagination;
     }
