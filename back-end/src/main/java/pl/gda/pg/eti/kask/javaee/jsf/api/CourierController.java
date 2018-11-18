@@ -1,18 +1,17 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api;
 
 import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.CourierWrapper;
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.PackWrapper;
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.WrapUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
-import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,14 +31,14 @@ public class CourierController {
 
     @GET
     @Path("")
-    public Collection<Courier> getAllCouriers(){
-        return courierService.findAllCouriers();
+    public Collection<CourierWrapper> getAllCouriers(){
+        return  WrapUtils.wrapCouriers(courierService.findAllCouriers());
     }
 
     @GET
     @Path("/{courier}/packs")
-    public Collection<Pack> getPacksOfCourier(@PathParam("courier") Courier courier){
-        return courierService.findPacksOfCourier(courier);
+    public Collection<PackWrapper> getPacksOfCourier(@PathParam("courier") Courier courier){
+        return WrapUtils.wrapPacks(courierService.findPacksOfCourier(courier));
     }
 
     @POST
@@ -80,4 +79,5 @@ public class CourierController {
                 );
         return links;
     }
+
 }

@@ -1,5 +1,9 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api.wrappers;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.TypeSize;
@@ -7,6 +11,10 @@ import pl.gda.pg.eti.kask.javaee.jsf.business.entities.TypeSize;
 import java.io.Serializable;
 import java.util.List;
 
+@EqualsAndHashCode(of = "id")
+@NoArgsConstructor
+@Getter
+@Setter
 public class PackWrapper implements Serializable {
     private Integer id;
     private String address;

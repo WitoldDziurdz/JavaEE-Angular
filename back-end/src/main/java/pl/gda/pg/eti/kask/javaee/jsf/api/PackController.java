@@ -1,5 +1,7 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api;
 
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.PackWrapper;
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.WrapUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
@@ -24,8 +26,8 @@ public class PackController {
 
     @GET
     @Path("")
-    public Collection<Pack> getAllPacks(){
-        return courierService.findAllPacks();
+    public Collection<PackWrapper> getAllPacks(){
+        return WrapUtils.wrapPacks(courierService.findAllPacks());
     }
 
     @POST
@@ -36,8 +38,8 @@ public class PackController {
 
     @GET
     @Path("/{pack}")
-    public Pack getPack(@PathParam("pack") Pack pack){
-        return pack;
+    public PackWrapper getPack(@PathParam("pack") Pack pack){
+        return new PackWrapper(pack,getPackLinks(pack.getId()));
     }
 
     @DELETE

@@ -1,5 +1,8 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api;
 
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.CourierWrapper;
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.DepartmentWrapper;
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.WrapUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Department;
@@ -24,14 +27,15 @@ public class DepartmentController {
     CourierService courierService;
 
     @GET
-    public Collection<Department> getAllDepartments(){
-        return courierService.findAllDepartments();
+    @Path("")
+    public Collection<DepartmentWrapper> getAllDepartments(){
+        return WrapUtils.wrapDepartments(courierService.findAllDepartments());
     }
 
     @GET
     @Path("/{department}/couriers")
-    public Collection<Courier> getPacksOfCourier(@PathParam("department") Department department){
-        return courierService.findCouriersOfDepartment(department);
+    public Collection<CourierWrapper> getPacksOfCourier(@PathParam("department") Department department){
+        return WrapUtils.wrapCouriers(courierService.findCouriersOfDepartment(department));
     }
 
     @POST
@@ -42,8 +46,8 @@ public class DepartmentController {
 
     @GET
     @Path("/{department}")
-    public Department getDepartment(@PathParam("department") Department department){
-        return department;
+    public DepartmentWrapper getDepartment(@PathParam("department") Department department){
+        return new DepartmentWrapper(department, getDepartmentLinks(department.getId()));
     }
 
     @DELETE
