@@ -34,6 +34,29 @@ public class DataGenerator {
                 TypeSize.MEDIUM,
                 5,
                 true );
+        Pack p4 = new Pack(4,
+                "Krakow wyspianskiego 33",
+                TypeSize.SMALL,
+                55,
+                true );
+
+        Pack p5 = new Pack(5,
+                "Warszawa wyspianskiego 44",
+                TypeSize.SMALL,
+                111,
+                false );
+
+        Pack p6 = new Pack(6,
+                "Wroclaw wyspianskiego 55",
+                TypeSize.SMALL,
+                333,
+                false );
+        Pack p7 = new Pack(7,
+                "Wroclaw wyspianskiego 66",
+                TypeSize.LARGE,
+                222,
+                false );
+
         Courier c1 = new Courier(1,"Hubert", "Polak","570434267",22,asList(p1,p2));
         Courier c2 = new Courier(2,"Piotr", "Majewski","570434211",44,asList(p3));
 
@@ -43,6 +66,11 @@ public class DataGenerator {
         packs.put(p1.getId(), p1);
         packs.put(p2.getId(), p2);
         packs.put(p3.getId(), p3);
+        packs.put(p4.getId(), p4);
+        packs.put(p5.getId(), p5);
+        packs.put(p6.getId(), p6);
+        packs.put(p7.getId(), p7);
+
         couriers.put(c1.getId(), c1);
         couriers.put(c2.getId(), c2);
         departments.put(d1.getId(),d1);

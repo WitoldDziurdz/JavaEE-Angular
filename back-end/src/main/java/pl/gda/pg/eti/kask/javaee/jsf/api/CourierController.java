@@ -2,10 +2,9 @@ package pl.gda.pg.eti.kask.javaee.jsf.api;
 
 import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.CourierWrapper;
 import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.PackWrapper;
-import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.WrapUtils;
+import pl.gda.pg.eti.kask.javaee.jsf.api.utils.WrapUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
-import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -13,13 +12,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.Collection;
-import java.util.List;
 
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
-import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.absoluteUri;
-import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.uri;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.LinkUtils.getCourierLinks;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.UriUtils.uri;
 
 @Path("/couriers")
 public class CourierController {
@@ -38,7 +36,8 @@ public class CourierController {
     @GET
     @Path("/{courier}/packs")
     public Collection<PackWrapper> getPacksOfCourier(@PathParam("courier") Courier courier){
-        return WrapUtils.wrapPacks(courierService.findPacksOfCourier(courier));
+        Collection<PackWrapper> packWrappers = WrapUtils.wrapPacks(courierService.findPacksOfCourier(courier));
+        return packWrappers;
     }
 
     @POST
@@ -68,16 +67,6 @@ public class CourierController {
         }
         courierService.saveCourier(updatedCourier);
         return ok().build();
-    }
-
-    public static List<Link> getCourierLinks(int id){
-        List links = UriUtils.asList(
-                new Link("self", absoluteUri(CourierController.class, "getCourier", id)),
-                new Link("delete", absoluteUri(CourierController.class, "deleteCourier", id)),
-                new Link("couriers", absoluteUri(CourierController.class, "getAllCouriers")),
-                new Link("courier_packs", absoluteUri(CourierController.class, "getPacksOfCourier", id))
-                );
-        return links;
     }
 
 }

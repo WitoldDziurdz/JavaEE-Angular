@@ -1,4 +1,4 @@
-package pl.gda.pg.eti.kask.javaee.jsf.api;
+package pl.gda.pg.eti.kask.javaee.jsf.api.utils;
 
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 
@@ -26,4 +26,13 @@ public class UriUtils {
     public static String absoluteUri(Class<?> clazz, String method, Object... vals) {
         return  prefix.concat(uri(clazz,method,vals).getPath());
     }
+
+    public static String uriWithQuery(Class<?> clazz, int start, int limit) {
+        String url = UriBuilder.fromResource(clazz)
+                .queryParam("start", String.valueOf(start))
+                .queryParam("limit",String.valueOf(limit))
+                .build().getPath();
+        return prefix.concat(url);
+    }
+
 }

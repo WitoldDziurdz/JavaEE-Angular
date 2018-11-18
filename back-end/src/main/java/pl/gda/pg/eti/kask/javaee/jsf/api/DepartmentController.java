@@ -1,10 +1,10 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api;
 
+import pl.gda.pg.eti.kask.javaee.jsf.api.utils.UriUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.CourierWrapper;
 import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.DepartmentWrapper;
-import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.WrapUtils;
+import pl.gda.pg.eti.kask.javaee.jsf.api.utils.WrapUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
-import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Department;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 
@@ -17,8 +17,9 @@ import java.util.List;
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
-import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.absoluteUri;
-import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.uri;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.LinkUtils.getDepartmentLinks;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.UriUtils.absoluteUri;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.UriUtils.uri;
 
 @Path("/departments")
 public class DepartmentController {
@@ -66,16 +67,4 @@ public class DepartmentController {
         courierService.saveDepartment(updatedDepartment);
         return ok().build();
     }
-
-
-    public static List<Link> getDepartmentLinks(int id){
-        List links = UriUtils.asList(
-                new Link("self", absoluteUri(DepartmentController.class, "getDepartment", id)),
-                new Link("delete", absoluteUri(DepartmentController.class, "deleteDepartment", id)),
-                new Link("departments", absoluteUri(DepartmentController.class, "getAllDepartments")),
-                new Link("department_couriers", absoluteUri(DepartmentController.class, "getPacksOfCourier", id))
-        );
-        return links;
-    }
-
 }

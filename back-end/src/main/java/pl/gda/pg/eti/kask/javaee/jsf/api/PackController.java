@@ -1,7 +1,9 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api;
 
+import pl.gda.pg.eti.kask.javaee.jsf.api.pagination.PackPagination;
+import pl.gda.pg.eti.kask.javaee.jsf.api.utils.UriUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.PackWrapper;
-import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.WrapUtils;
+import pl.gda.pg.eti.kask.javaee.jsf.api.utils.WrapUtils;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
@@ -10,13 +12,12 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
-import java.util.List;
 
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
-import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.absoluteUri;
-import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.uri;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.LinkUtils.getPackLinks;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.utils.UriUtils.uri;
 
 @Path("/packs")
 public class PackController {
@@ -26,8 +27,11 @@ public class PackController {
 
     @GET
     @Path("")
-    public Collection<PackWrapper> getAllPacks(){
-        return WrapUtils.wrapPacks(courierService.findAllPacks());
+    public PackPagination getAllPacks(@DefaultValue("0") @QueryParam("start") Integer start,
+                                      @DefaultValue("3") @QueryParam("limit") Integer limit){
+        //return WrapUtils.wrapPacks(courierService.findAllPacks());
+        PackPagination packPagination = new PackPagination(start,limit,courierService.findAllPacks());
+        return packPagination;
     }
 
     @POST
@@ -59,12 +63,4 @@ public class PackController {
         return ok().build();
     }
 
-    public static List<Link> getPackLinks(int id){
-        List links = UriUtils.asList(
-                new Link("self", absoluteUri(PackController.class, "getPack", id)),
-                new Link("delete", absoluteUri(PackController.class, "deletePack", id)),
-                new Link("packs", absoluteUri(PackController.class, "getAllPacks"))
-        );
-        return links;
-    }
 }
