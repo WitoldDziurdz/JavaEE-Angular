@@ -3,9 +3,8 @@ package pl.gda.pg.eti.kask.javaee.jsf.business.entities;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Getter
@@ -16,16 +15,6 @@ public class Pack implements Serializable {
     private TypeSize typeSize;
     private double price;
     private boolean express;
-
-    private List<Link> links = new ArrayList<>();
-
-    public Pack(Integer id, String address, TypeSize typeSize, double price, boolean express) {
-        this.id = id;
-        this.address = address;
-        this.typeSize = typeSize;
-        this.price = price;
-        this.express = express;
-    }
 
     @Override
     public String toString(){
@@ -42,9 +31,5 @@ public class Pack implements Serializable {
 
     public boolean idIsNull(){
         return this.id == null;
-    }
-
-    public void addLink(String rel, String url){
-        links.add(new Link(rel, url));
     }
 }

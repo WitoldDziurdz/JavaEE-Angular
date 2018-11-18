@@ -30,7 +30,6 @@ public class PackController {
 
     @POST
     public Response savePack(Pack pack){
-        pack.setLinks(getPackLinks(pack.getId()));
         courierService.savePack(pack);
         return Response.created(uri(PackController.class, "getPack", pack.getId())).build();
     }

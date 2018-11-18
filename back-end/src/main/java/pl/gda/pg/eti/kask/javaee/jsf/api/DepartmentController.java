@@ -36,7 +36,6 @@ public class DepartmentController {
 
     @POST
     public Response saveDepartment(Department department){
-        department.setLinks(getDepartmentLinks(department.getId()));
         courierService.saveDepartment(department);
         return Response.created(uri(DepartmentController.class, "getDepartment", department.getId())).build();
     }

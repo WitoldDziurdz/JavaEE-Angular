@@ -5,6 +5,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
@@ -17,17 +18,6 @@ public class Courier implements Serializable {
     private String phone;
     private int age;
     private List<Pack> packs = new ArrayList<>();
-
-    public Courier(Integer id, String name, String surname, String phone, int age, List<Pack> packs) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.age = age;
-        this.packs = packs;
-    }
-
-    private List<Link> links = new ArrayList<>();
 
     @Override
     public String toString(){
@@ -55,7 +45,4 @@ public class Courier implements Serializable {
         return this.id == null;
     }
 
-    public void addLink(String rel, String url){
-        links.add(new Link(rel, url));
-    }
 }

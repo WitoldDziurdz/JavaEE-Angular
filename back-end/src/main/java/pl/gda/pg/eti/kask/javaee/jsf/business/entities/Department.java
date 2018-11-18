@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Getter
@@ -16,16 +17,6 @@ public class Department implements Serializable {
     private String address;
     private boolean isStorage;
     private List<Courier> couriers = new ArrayList<>();
-
-    private List<Link> links = new ArrayList<>();
-
-    public Department(Integer id, int numberOfWorkers, String address, boolean isStorage, List<Courier> couriers) {
-        this.id = id;
-        this.numberOfWorkers = numberOfWorkers;
-        this.address = address;
-        this.isStorage = isStorage;
-        this.couriers = couriers;
-    }
 
     public boolean idIsNull(){
         return this.id == null;
@@ -39,10 +30,6 @@ public class Department implements Serializable {
                 }
             }
         }
-    }
-
-    public void addLink(String rel, String url){
-        links.add(new Link(rel, url));
     }
 }
 

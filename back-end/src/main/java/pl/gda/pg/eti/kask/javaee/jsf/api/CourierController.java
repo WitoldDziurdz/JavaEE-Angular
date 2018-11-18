@@ -44,7 +44,6 @@ public class CourierController {
 
     @POST
     public Response saveCourier(Courier courier){
-        courier.setLinks(getCourierLinks(courier.getId()));
         courierService.saveCourier(courier);
         return Response.created(uri(CourierController.class, "getCourier", courier.getId())).build();
     }
