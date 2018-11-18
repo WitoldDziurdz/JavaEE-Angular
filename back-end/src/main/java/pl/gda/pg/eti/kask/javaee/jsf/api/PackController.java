@@ -1,16 +1,19 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api;
 
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
+import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
+import java.util.List;
 
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.absoluteUri;
 import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.uri;
 
 @Path("/packs")
@@ -20,12 +23,14 @@ public class PackController {
     CourierService courierService;
 
     @GET
+    @Path("")
     public Collection<Pack> getAllPacks(){
         return courierService.findAllPacks();
     }
 
     @POST
     public Response savePack(Pack pack){
+        pack.setLinks(getPackLinks(pack.getId()));
         courierService.savePack(pack);
         return Response.created(uri(PackController.class, "getPack", pack.getId())).build();
     }
@@ -51,5 +56,14 @@ public class PackController {
         }
         courierService.savePack(updatedPack);
         return ok().build();
+    }
+
+    public static List<Link> getPackLinks(int id){
+        List links = UriUtils.asList(
+                new Link("self", absoluteUri(PackController.class, "getPack", id)),
+                new Link("delete", absoluteUri(PackController.class, "deletePack", id)),
+                new Link("packs", absoluteUri(PackController.class, "getAllPacks"))
+        );
+        return links;
     }
 }

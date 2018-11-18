@@ -1,5 +1,7 @@
 package pl.gda.pg.eti.kask.javaee.jsf.business.boundary;
 
+import pl.gda.pg.eti.kask.javaee.jsf.api.CourierController;
+import pl.gda.pg.eti.kask.javaee.jsf.api.PackController;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Department;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
@@ -24,19 +26,23 @@ public class DataGenerator {
                 TypeSize.LARGE,
                 10.22,
                 false );
+        p1.setLinks(PackController.getPackLinks(p1.getId()));
         Pack p2 = new Pack(2,
                 "Gdansk wyspianskiego 12",
                 TypeSize.SMALL,
                 5,
                 true );
+        p2.setLinks(PackController.getPackLinks(p2.getId()));
         Pack p3 = new Pack(3,
-                "Gdansk wyspianskiego 22",
+                "Gdan sk wyspianskiego 22",
                 TypeSize.MEDIUM,
                 5,
                 true );
+        p3.setLinks(PackController.getPackLinks(p3.getId()));
         Courier c1 = new Courier(1,"Hubert", "Polak","570434267",22,asList(p1,p2));
+        c1.setLinks(CourierController.getCourierLinks(c1.getId()));
         Courier c2 = new Courier(2,"Piotr", "Majewski","570434211",44,asList(p3));
-
+        c2.setLinks(CourierController.getCourierLinks(c2.getId()));
         Department d1 = new Department(1, 12, "Warszawa",false, asList(c1));
         Department d2 = new Department(2, 22, "Gdansk",true, asList(c2));
 

@@ -1,17 +1,25 @@
 package pl.gda.pg.eti.kask.javaee.jsf.api;
 
+import pl.gda.pg.eti.kask.javaee.jsf.api.wrappers.CourierWrapper;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
+import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Pack;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.absoluteUri;
 import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.uri;
 
 @Path("/couriers")
@@ -19,7 +27,11 @@ public class CourierController {
     @Inject
     CourierService courierService;
 
+    @Context
+    UriInfo uriInfo;
+
     @GET
+    @Path("")
     public Collection<Courier> getAllCouriers(){
         return courierService.findAllCouriers();
     }
@@ -32,14 +44,15 @@ public class CourierController {
 
     @POST
     public Response saveCourier(Courier courier){
+        courier.setLinks(getCourierLinks(courier.getId()));
         courierService.saveCourier(courier);
         return Response.created(uri(CourierController.class, "getCourier", courier.getId())).build();
     }
 
     @GET
     @Path("/{courier}")
-    public Courier getCourier(@PathParam("courier") Courier courier){
-        return courier;
+    public CourierWrapper getCourier(@PathParam("courier") Courier courier){
+        return new CourierWrapper(courier,getCourierLinks(courier.getId()));
     }
 
     @DELETE
@@ -57,5 +70,15 @@ public class CourierController {
         }
         courierService.saveCourier(updatedCourier);
         return ok().build();
+    }
+
+    public static List<Link> getCourierLinks(int id){
+        List links = UriUtils.asList(
+                new Link("self", absoluteUri(CourierController.class, "getCourier", id)),
+                new Link("delete", absoluteUri(CourierController.class, "deleteCourier", id)),
+                new Link("couriers", absoluteUri(CourierController.class, "getAllCouriers")),
+                new Link("courier_packs", absoluteUri(CourierController.class, "getPacksOfCourier", id))
+                );
+        return links;
     }
 }

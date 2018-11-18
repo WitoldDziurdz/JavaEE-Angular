@@ -3,15 +3,18 @@ package pl.gda.pg.eti.kask.javaee.jsf.api;
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.CourierService;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Courier;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Department;
+import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Link;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
+import java.util.List;
 
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 import static javax.ws.rs.core.Response.status;
+import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.absoluteUri;
 import static pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils.uri;
 
 @Path("/departments")
@@ -33,6 +36,7 @@ public class DepartmentController {
 
     @POST
     public Response saveDepartment(Department department){
+        department.setLinks(getDepartmentLinks(department.getId()));
         courierService.saveDepartment(department);
         return Response.created(uri(DepartmentController.class, "getDepartment", department.getId())).build();
     }
@@ -58,6 +62,17 @@ public class DepartmentController {
         }
         courierService.saveDepartment(updatedDepartment);
         return ok().build();
+    }
+
+
+    public static List<Link> getDepartmentLinks(int id){
+        List links = UriUtils.asList(
+                new Link("self", absoluteUri(DepartmentController.class, "getDepartment", id)),
+                new Link("delete", absoluteUri(DepartmentController.class, "deleteDepartment", id)),
+                new Link("departments", absoluteUri(DepartmentController.class, "getAllDepartments")),
+                new Link("department_couriers", absoluteUri(DepartmentController.class, "getPacksOfCourier", id))
+        );
+        return links;
     }
 
 }
